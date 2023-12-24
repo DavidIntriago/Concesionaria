@@ -13,6 +13,9 @@ let clienteControl=new cliente();
 const auto=require('../app/controllers/AutoControl')
 let autoControl=new auto();
 
+const venta=require('../app/controllers/VentaControl')
+let ventaControl=new venta();
+
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
@@ -39,5 +42,10 @@ router.post('/admin/cliente/save', clienteControl.crear);
 //AUTOOO  
 router.get('/admin/auto', autoControl.listar);
 router.post('/admin/auto/save', autoControl.crear);
+
+
+//VENTAA
+router.get('/admin/venta', ventaControl.listar);
+router.post('/admin/venta/save', ventaControl.crear);
 
 module.exports = router;
