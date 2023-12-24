@@ -142,7 +142,9 @@ class PersonaControl {
     lista.id_rol = rolId.id;
 
     await lista.save();
-
+    rolId.external_id = UUID.v4();
+    await rolId.save();
+    
     res.status(200);
     res.json({
       msg: "OK",

@@ -17,6 +17,8 @@ class VentaControl {
     });
   }
 
+  
+
   async crear(req, res) {
     var UUID = require("uuid");
     var clienteId = await cliente.findOne({
@@ -104,6 +106,162 @@ class VentaControl {
         });
       }
     }
+  }
+
+  async update(req, res) {
+    const external = req.params.external;
+    //console.log("Tienes externas: " + external);
+
+    var lista = await venta.findOne({
+      where: { external_id: external },
+    });
+
+    var clienteId = await cliente.findOne({
+      where: { external_id: req.body.id_cliente },
+    });
+
+    var autoId = await auto.findOne({
+      where: { external_id: req.body.id_auto },
+    });
+
+    //console.log("Tienes venta: " + lista);
+
+    // Lista de campos permitidos
+    const camposPermitidos = ["fecha", "id_auto", "id_cliente"];
+
+    // Verificar que solo se envíen campos permitidos
+    const camposEnviados = Object.keys(req.body);
+    const camposInvalidos = camposEnviados.filter(
+      (campo) => !camposPermitidos.includes(campo)
+    );
+
+    //console.log(req.body)
+    //console.log(camposInvalidos)
+
+    console.log(camposEnviados);
+    if (
+      camposInvalidos.length > 0 ||
+      !camposPermitidos.every((campo) => camposEnviados.includes(campo))
+    ) {
+      res.status(400);
+      res.json({
+        msg: "ERROR",
+        tag: "Campos no permitidos o incompletos",
+        code: 400,
+      });
+      return;
+    } else {
+      var primerAuto = await auto.findOne({
+        where: { id: lista.id_auto },
+      });
+      console.log(primerAuto);
+      if (autoId.estado == false) {
+        if (autoId.color === "Blanco" || autoId.color === "Plata") {
+          lista.fecha = req.body.modelo;
+          lista.id_auto = autoId.id;
+          lista.id_cliente = clienteId.id;
+          lista.precio = autoId.precio;
+          lista.recargo=false;
+          await lista.save();
+        } else {
+          lista.fecha = req.body.modelo;
+          lista.id_auto = autoId.id;
+          lista.id_cliente = clienteId.id;
+          lista.precio = autoId.precio;
+          lista.recargo = true;
+          await lista.save();
+        }
+        if (primerAuto.external_id != autoId.external_id) {
+          primerAuto.estado = false;
+          await primerAuto.save();
+          autoId.estado=true;
+          await autoId.save();
+          //console.log("fguardo cambio nuevo");
+        }
+
+        if (lista === null) {
+          res.status(401);
+          res.json({
+            msg: "ERROR",
+            tag: "NO se pudo actualizar",
+            code: 401,
+          });
+        } else {
+          res.status(200);
+          res.json({
+            msg: "OK",
+            code: 200,
+            data: lista,
+          });
+        }
+      } else {
+        res.status(401);
+        res.json({
+          msg: "ERROR",
+          tag: "El auto se encuentra vendido",
+          code: 401,
+        });
+      }
+    }
+  }
+
+  async obtener(req, res) {
+    const external = req.params.external;
+    var lista = await venta.findOne({
+      where: { external_id: external },
+      include: [
+        {
+          model: models.persona,
+          as: "persona",
+          attributes: ["apellidos", "nombres", "id_rol"],
+        },
+        {
+          model: models.cliente,
+          as: "cliente",
+          attributes: ["apellidos", "nombres", "direccion", "celular"],
+        },
+        {
+          model: models.auto,
+          as: "auto",
+          attributes: ["modelo", "marca", "anio", "color", "foto"],
+        }
+      ],
+      // para limitar lo que va a listar, envia loss atributos y con esto[cambia de nombre]
+      attributes: ["fecha", ["external_id", "id"], "precio", "recargo", "porcentajeIva", ],
+    });
+    if (lista === undefined || lista === null) {
+      res.status(200);
+      res.json({
+        msg: "OK",
+        code: 200,
+        data: {},
+      });
+    } else {
+      res.status(200);
+      res.json({
+        msg: "OK",
+        code: 200,
+        data: lista,
+      });
+    }
+  }
+
+  async lista_vendedor(req, res) {
+    const external_vendedor=req.params.external;
+
+    var vendedorId = await vendedor.findOne({
+      where: { external_id: external_vendedor },
+    });
+
+    var lista = await venta.findAll({
+      where: {id_vendedor: vendedorId.id},
+    });
+    res.status(200);
+    res.json({
+      msg: "OK",
+      code: 200,
+      data: lista,
+    });
   }
 }
 module.exports = VentaControl;

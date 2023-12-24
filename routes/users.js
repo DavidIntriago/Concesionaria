@@ -42,10 +42,16 @@ router.post('/admin/cliente/save', clienteControl.crear);
 //AUTOOO  
 router.get('/admin/auto', autoControl.listar);
 router.post('/admin/auto/save', autoControl.crear);
+router.put('/admin/auto/update/:external', autoControl.update);
 
 
 //VENTAA
 router.get('/admin/venta', ventaControl.listar);
 router.post('/admin/venta/save', ventaControl.crear);
+router.put('/admin/venta/update/:external', ventaControl.update);
+router.get('/admin/venta/vendedor/:external', ventaControl.lista_vendedor);
+router.get('/admin/venta/:external', ventaControl.obtener);
+
+
 
 module.exports = router;
