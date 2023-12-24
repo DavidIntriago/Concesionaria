@@ -1,0 +1,78 @@
+"use strict";
+
+var models = require("../models");
+var auto = models.auto;
+
+class AutoControl {
+  async listar(req, res) {
+    var lista = await auto.findAll();
+    res.status(200);
+    res.json({
+      msg: "OK",
+      code: 200,
+      data: lista,
+    });
+  }
+
+  async crear(req, res) {
+    var UUID = require("uuid");
+    // Lista de campos permitidos
+    const camposPermitidos = [
+      "modelo",
+      "marca",
+      "anio",
+      "color",
+      "precio"
+    ];
+
+    // Verificar que solo se envíen campos permitidos
+    const camposEnviados = Object.keys(req.body);
+    const camposInvalidos = camposEnviados.filter(
+      (campo) => !camposPermitidos.includes(campo)
+    );
+
+    //console.log(req.body)
+    //console.log(camposInvalidos)
+
+    console.log(camposEnviados);
+    if (
+      camposInvalidos.length > 0 ||
+      !camposPermitidos.every((campo) => camposEnviados.includes(campo))
+    ) {
+      res.status(400);
+      res.json({
+        msg: "ERROR",
+        tag: "Campos no permitidos o incompletos",
+        code: 400,
+      });
+      return;
+    } else {
+        
+      var result = await auto.create({
+        modelo: req.body.modelo,
+        marca: req.body.marca,
+        anio: req.body.anio,
+        color: req.body.color,
+        precio: req.body.precio,
+        external_id: UUID.v4(),
+
+      });
+      if (result === null) {
+        res.status(401);
+        res.json({
+          msg: "ERROR",
+          tag: "NO se pudo crear",
+          code: 401,
+        });
+      } else {
+        res.status(200);
+        res.json({
+          msg: "OK",
+          code: 200,
+          data: result,
+        });
+      }
+    }
+  }
+}
+module.exports = AutoControl;
