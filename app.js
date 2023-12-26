@@ -28,7 +28,7 @@ let models = require("./app/models");
 models.sequelize
   .sync()
   .then(() => {
-    console.log("ta bien");
+    console.log("esta bien");
   })
   .catch(err => {
     console.log(err, "esta mal");
