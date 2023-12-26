@@ -5,7 +5,7 @@ module.exports = (sequelize, DataTypes) => {
     modelo:{type: DataTypes.STRING(100), defaultValue: "NONE"},
     marca:{type: DataTypes.STRING(100), defaultValue: "NONE"},
     anio:{type: DataTypes.INTEGER(4)},
-    color:{type: DataTypes.STRING(20), defaultValue: "NONE"},
+    color:{type: DataTypes.STRING(20), defaultValue: "imagen.jpg"},
     precio:{type: DataTypes.FLOAT},
     foto:{type: DataTypes.STRING, defaultValue: "NONE"},
     estado:{type: DataTypes.BOOLEAN, defaultValue:false},

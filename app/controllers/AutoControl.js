@@ -2,10 +2,17 @@
 
 var models = require("../models");
 var auto = models.auto;
+var formidable = require('formidable');
+var fs = require('fs');
+var extensiones = ['jpg', 'png', 'jpeg'];
+const tamanioMax = 2 * 1024 * 1024;
 
 class AutoControl {
   async listar(req, res) {
-    var lista = await auto.findAll();
+    var lista = await auto.findAll({
+      attributes: ["modelo", "marca", "color", "anio", "foto", "precio","estado", ["external_id", "id"]],
+
+    });
     res.status(200);
     res.json({
       msg: "OK",
@@ -136,5 +143,49 @@ class AutoControl {
       }
     }
   }
+
+  async guardarFoto(req, res) {
+    const externalAuto = req.params.external;
+    var form = new formidable.IncomingForm(), files = [];
+    form.on('file', function (field, file) {
+        files.push(file);
+    }).on('end', function () {
+        console.log('OK');
+    });
+    form.parse(req, function (err, fields) {
+        let listado = files;
+        let external = fields.external[0];
+        for (let index = 0; index < listado.length; index++) {
+            var file = listado[index];
+            var extension = file.originalFilename.split('.').pop().toLowerCase();
+            if (file.size > tamanioMax) {
+                res.status(400);
+                res.json({ msg: "ERROR", tag: "El tamaño del archivo supera los 2MB ", code: 400 });
+            } else {
+                if (extensiones.includes(extension)) {
+                    const name = external + '.' + extension;
+                    fs.rename(file.filepath, "public/images/" + name, async function (err) {
+                        if (err) {
+                            res.status(400);
+                            console.log(err);
+                            res.json({ msg: "Error", tag: "No se pudo guardar el archivo", code: 400});
+                        } else {
+                            await auto.update({foto:name},{where:{external_id:externalAuto}});
+                            res.status(200);
+                            res.json({ msg: "OK", tag: "Imagen guardada", code: 200 });
+                            
+                        }
+                    });
+                } else {
+                    res.status(400);
+                    res.json({ msg: "ERROR", tag: "Solo soporta " + extensiones, code: 400 });
+                }
+            }
+
+        }
+    });
+
+}
+ 
 }
 module.exports = AutoControl;

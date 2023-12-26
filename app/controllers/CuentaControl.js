@@ -12,6 +12,20 @@ npm install doteenv --save
 */
 
 class CuentaControl {
+
+  async listar(req, res) {
+    var lista = await cuenta.findAll({
+      attributes: ["correo", "clave", "estado", ["external_id", "id"]],
+
+    });
+    res.status(200);
+    res.json({
+      msg: "OK",
+      code: 200,
+      data: lista,
+    });
+  }
+
   async inicio_sesion(req, res) {
     if (req.body.hasOwnProperty("correo") && 
     req.body.hasOwnProperty("clave")) {

@@ -6,7 +6,10 @@ var cliente = models.cliente;
 
 class ClienteControl {
   async listar(req, res) {
-    var lista = await cliente.findAll();
+    var lista = await cliente.findAll({
+      // para limitar lo que va a listar, envia loss atributos y con esto[cambia de nombre]
+      attributes: ["nombres", "apellidos", "direccion", "celular", ["external_id", "id"]],
+    });
     res.status(200);
     res.json({
       msg: "OK",

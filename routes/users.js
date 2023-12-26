@@ -142,35 +142,34 @@ const isGerente = async (req, res, next) => {
 };
 
 // ROLLL
-router.get("/admin/rol", rolControl.listar);
-router.post("/admin/rol/save", rolControl.crear);
+router.get("/admin/rol", [auth, isGerente], rolControl.listar);
+router.post("/admin/rol/save",[auth, isGerente], rolControl.crear);
 
 // PERSONAAAAA
 router.get("/admin/persona", personaControl.listar);
-router.post("/admin/persona/save", personaControl.crear);
-router.put("/admin/persona/update/:external", personaControl.update);
+router.post("/admin/persona/save", [auth, isGerente], personaControl.crear);
+router.put("/admin/persona/update/:external", [auth, isGerente], personaControl.update);
 
 //CLIENTEEEEEE
-router.get("/admin/cliente", [auth, isGerente], clienteControl.listar);
-router.post("/admin/cliente/save", clienteControl.crear);
-
-//CLIENTEEEEEE
-router.get("/admin/cliente", clienteControl.listar);
-router.post("/admin/cliente/save", clienteControl.crear);
+router.get("/admin/cliente", auth, clienteControl.listar);
+router.post("/admin/cliente/save", [auth, isVendedor], clienteControl.crear);
 
 //AUTOOO
 router.get("/admin/auto", autoControl.listar);
-router.post("/admin/auto/save", autoControl.crear);
-router.put("/admin/auto/update/:external", autoControl.update);
+router.post("/admin/auto/save", [auth, isGerente],autoControl.crear);
+router.put("/admin/auto/update/:external", [auth, isGerente], autoControl.update);
+router.post("/admin/auto/update/imagen/:external", [auth, isGerente], autoControl.guardarFoto);
+
 
 //VENTAA
 router.get("/admin/venta", ventaControl.listar);
-router.post("/admin/venta/save", ventaControl.crear);
-router.put("/admin/venta/update/:external", ventaControl.update);
+router.post("/admin/venta/save", [auth, isVendedor], ventaControl.crear);
+router.put("/admin/venta/update/:external", [auth, isVendedor],ventaControl.update);
 router.get("/admin/venta/vendedor/:external", ventaControl.lista_vendedor);
 router.get("/admin/venta/:external", ventaControl.obtener);
 
 //CUENTAA
 router.post("/admin/inicio_sesion", cuentaControl.inicio_sesion);
+router.get("/admin/cuenta", [auth, isGerente], cuentaControl.listar);
 
 module.exports = router;

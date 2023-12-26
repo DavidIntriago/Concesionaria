@@ -8,7 +8,26 @@ var auto = models.auto;
 
 class VentaControl {
   async listar(req, res) {
-    var lista = await venta.findAll();
+    var lista = await venta.findAll({
+      include: [
+        {
+          model: models.persona,
+          as: "persona",
+          attributes: ["apellidos", "nombres"],
+        
+        },{
+          model: models.cliente,
+          as: "cliente",
+          attributes: ["apellidos", "nombres", "direccion", "celular"],
+        },{
+          model: models.auto,
+          as: "auto",
+          attributes: ["modelo", "marca", "color", "anio", "foto", "precio"]
+        }
+      ],
+      attributes: ["fecha", "precio", "recargo", "porcentajeIva",["external_id", "id"]],
+
+    });
     res.status(200);
     res.json({
       msg: "OK",
@@ -167,7 +186,7 @@ class VentaControl {
           lista.fecha = req.body.modelo;
           lista.id_auto = autoId.id;
           lista.id_cliente = clienteId.id;
-          lista.precio = autoId.precio;
+          lista.precio = (autoId.precio)+(autoId.precio*0.1);
           lista.recargo = true;
           await lista.save();
         }
@@ -255,6 +274,24 @@ class VentaControl {
 
     var lista = await venta.findAll({
       where: {id_vendedor: vendedorId.id},
+      include: [
+        {
+          model: models.persona,
+          as: "persona",
+          attributes: ["apellidos", "nombres"],
+        
+        },{
+          model: models.cliente,
+          as: "cliente",
+          attributes: ["apellidos", "nombres", "direccion", "celular"],
+        },{
+          model: models.auto,
+          as: "auto",
+          attributes: ["modelo", "marca", "color", "anio", "foto", "precio"]
+        }
+      ],
+      attributes: ["fecha", "precio", "recargo", "porcentajeIva",["external_id", "id"]],
+
     });
     res.status(200);
     res.json({

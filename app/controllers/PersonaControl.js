@@ -6,7 +6,10 @@ var rol = models.rol;
 
 class PersonaControl {
   async listar(req, res) {
-    var lista = await persona.findAll();
+    var lista = await persona.findAll({
+      attributes: ["nombres", "apellidos", "direccion", "celular", "fecha_nac", ["external_id", "id"], "id_rol"],
+
+    });
     res.status(200);
     res.json({
       msg: "OK",
@@ -51,9 +54,11 @@ class PersonaControl {
       });
       return;
     } else {
+      console.log(rolId)
       let transaction = await models.sequelize.transaction();
       try {
         if (rolId !== undefined && rolId !== null) {
+          console.log(rolId.external_id)
           var result = await persona.create(
             {
               nombres: req.body.nombres,
