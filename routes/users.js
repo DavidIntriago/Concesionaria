@@ -66,7 +66,6 @@ const auth = function middleware(req, res, next) {
             code: 401,
           });
         } else {
-          //TODO Autorizacion
           next();
         }
       }

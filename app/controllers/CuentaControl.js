@@ -48,7 +48,6 @@ class CuentaControl {
               attributes: ["apellidos", "nombres", "external_id"],
             },
           ],
-        
       });
       if (cuentaA === null) {
         res.status(400);
