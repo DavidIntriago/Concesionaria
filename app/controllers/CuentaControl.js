@@ -26,6 +26,14 @@ class CuentaControl {
     });
   }
 
+  async validarGerente(req, res) {
+    res.status(200);
+    res.json({
+      msg: "Es gerente",
+      code: 200
+    });
+  }
+
   async inicio_sesion(req, res) {
     if (req.body.hasOwnProperty("correo") && 
     req.body.hasOwnProperty("clave")) {
@@ -37,7 +45,7 @@ class CuentaControl {
             {
               model: models.persona,
               as: "persona",
-              attributes: ["apellidos", "nombres"],
+              attributes: ["apellidos", "nombres", "external_id"],
             },
           ],
         
@@ -64,6 +72,7 @@ class CuentaControl {
             var info = {
               token: token,
               user: cuentaA.persona.apellidos + " " + cuentaA.persona.nombres,
+              external_id: cuentaA.persona.external_id,
             };
             res.status(200);
             res.json({

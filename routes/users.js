@@ -125,7 +125,7 @@ const isGerente = async (req, res, next) => {
 
   if (rolAux.nombre === "Gerente") {
     next();
-    returns
+    return
   } else {
     res.status(401);
     res.json({
@@ -141,13 +141,14 @@ const isGerente = async (req, res, next) => {
   // next();
 };
 
+
 // ROLLL
 router.get("/admin/rol", [auth, isGerente], rolControl.listar);
 router.post("/admin/rol/save",[auth, isGerente], rolControl.crear);
 
 // PERSONAAAAA
 router.get("/admin/persona", personaControl.listar);
-router.post("/admin/persona/save", [auth, isGerente], personaControl.crear);
+router.post("/admin/persona/save", personaControl.crear);
 router.put("/admin/persona/update/:external", [auth, isGerente], personaControl.update);
 
 //CLIENTEEEEEE
@@ -155,21 +156,26 @@ router.get("/admin/cliente", auth, clienteControl.listar);
 router.post("/admin/cliente/save", [auth, isVendedor], clienteControl.crear);
 
 //AUTOOO
-router.get("/admin/auto", autoControl.listar);
+router.get("/autos", autoControl.listar);
 router.post("/admin/auto/save", [auth, isGerente],autoControl.crear);
 router.put("/admin/auto/update/:external", [auth, isGerente], autoControl.update);
 router.post("/admin/auto/update/imagen/:external", [auth, isGerente], autoControl.guardarFoto);
+router.get("/admin/infauto/:external", autoControl.obtenerAuto);
 
 
 //VENTAA
-router.get("/admin/venta", ventaControl.listar);
+router.get("/admin/venta", [auth, isGerente],ventaControl.listar);
 router.post("/admin/venta/save", [auth, isVendedor], ventaControl.crear);
 router.put("/admin/venta/update/:external", [auth, isVendedor],ventaControl.update);
 router.get("/admin/venta/vendedor/:external", ventaControl.lista_vendedor);
 router.get("/admin/venta/:external", ventaControl.obtener);
+router.get("/admin/ventaMes/:external", ventaControl.obtenerFecha);
+
 
 //CUENTAA
 router.post("/admin/inicio_sesion", cuentaControl.inicio_sesion);
 router.get("/admin/cuenta", [auth, isGerente], cuentaControl.listar);
+router.get("/admin/validar", [auth, isGerente], cuentaControl.validarGerente);
+
 
 module.exports = router;

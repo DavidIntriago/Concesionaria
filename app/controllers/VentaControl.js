@@ -5,6 +5,8 @@ var venta = models.venta;
 var cliente = models.cliente;
 var vendedor = models.persona;
 var auto = models.auto;
+const { Op, Sequelize } = require("sequelize");
+
 
 class VentaControl {
   async listar(req, res) {
@@ -80,24 +82,24 @@ class VentaControl {
       if (autoId.estado == false) {
         if (autoId.color == "Blanco" || autoId.color == "Plata") {
           var result = await venta.create({
-            fecha: req.body.modelo,
+            fecha: req.body.fecha,
             id_auto: autoId.id,
             id_cliente: clienteId.id,
             id_vendedor: vendedorId.id,
-            precio: autoId.precio,
+            precio : (autoId.precio + autoId.precio * 0.14),
             external_id: UUID.v4(),
           });
         } else {
           var result = await venta.create({
-            fecha: req.body.modelo,
+            fecha: req.body.fecha,
             id_auto: autoId.id,
             id_cliente: clienteId.id,
             id_vendedor: vendedorId.id,
-            precio: autoId.precio,
+            precio : ((autoId.precio)+(autoId.precio * 0.14)) + (autoId.precio * 0.1),
+            recargo : true,
             external_id: UUID.v4(),
           });
         }
-
         autoId.estado = true;
         await autoId.save();
 
@@ -176,14 +178,14 @@ class VentaControl {
       console.log(primerAuto);
       if (autoId.estado == false) {
         if (autoId.color === "Blanco" || autoId.color === "Plata") {
-          lista.fecha = req.body.modelo;
+          lista.fecha = req.body.fecha;
           lista.id_auto = autoId.id;
           lista.id_cliente = clienteId.id;
           lista.precio = autoId.precio;
           lista.recargo=false;
           await lista.save();
         } else {
-          lista.fecha = req.body.modelo;
+          lista.fecha = req.body.fecha;
           lista.id_auto = autoId.id;
           lista.id_cliente = clienteId.id;
           lista.precio = (autoId.precio)+(autoId.precio*0.1);
@@ -237,12 +239,12 @@ class VentaControl {
         {
           model: models.cliente,
           as: "cliente",
-          attributes: ["apellidos", "nombres", "direccion", "celular"],
+          attributes: ["apellidos", "nombres", "direccion", "celular", ["external_id", "id"]],
         },
         {
           model: models.auto,
           as: "auto",
-          attributes: ["modelo", "marca", "anio", "color", "foto"],
+          attributes: ["modelo", "marca", "anio", "color", "foto", ["external_id", "id"], "precio"],
         }
       ],
       // para limitar lo que va a listar, envia loss atributos y con esto[cambia de nombre]
@@ -300,5 +302,43 @@ class VentaControl {
       data: lista,
     });
   }
+
+  async obtenerFecha(req, res) {
+    const mes=req.params.external;
+
+    var lista = await venta.findAll({
+      where: {
+        [Op.and]: [
+          Sequelize.where(Sequelize.fn('MONTH', Sequelize.col('fecha')), '=', mes),
+        ]
+      },
+      include: [
+        {
+          model: models.persona,
+          as: "persona",
+          attributes: ["apellidos", "nombres"],
+        
+        },{
+          model: models.cliente,
+          as: "cliente",
+          attributes: ["apellidos", "nombres", "direccion", "celular"],
+        },{
+          model: models.auto,
+          as: "auto",
+          attributes: ["modelo", "marca", "color", "anio", "foto", "precio"]
+        }
+      ],
+      attributes: ["fecha", "precio", "recargo", "porcentajeIva",["external_id", "id"]],
+
+    });
+    res.status(200);
+    res.json({
+      msg: "OK",
+      code: 200,
+      data: lista,
+    });
+  }
 }
+
+
 module.exports = VentaControl;

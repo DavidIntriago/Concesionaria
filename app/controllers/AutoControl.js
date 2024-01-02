@@ -21,6 +21,23 @@ class AutoControl {
     });
   }
 
+    async obtenerAuto(req, res) {
+      const external = req.params.external;
+      var lista = await auto.findOne({
+        where:{external_id:external},
+
+        attributes: ["modelo", "marca", "color", "anio", "foto", "precio","estado", ["external_id", "id"]],
+  
+      });
+      res.status(200);
+      res.json({
+        msg: "OK",
+        code: 200,
+        data: lista,
+      });
+    }
+  
+
   async crear(req, res) {
     var UUID = require("uuid");
     // Lista de campos permitidos
@@ -147,45 +164,52 @@ class AutoControl {
   async guardarFoto(req, res) {
     const externalAuto = req.params.external;
     var form = new formidable.IncomingForm(), files = [];
+    
     form.on('file', function (field, file) {
         files.push(file);
     }).on('end', function () {
         console.log('OK');
     });
-    form.parse(req, function (err, fields) {
+    
+    form.parse(req, async function (err, fields) {
         let listado = files;
         let external = fields.external[0];
+        let fotos = [];  // Array para almacenar los nombres de las imágenes
+
         for (let index = 0; index < listado.length; index++) {
             var file = listado[index];
             var extension = file.originalFilename.split('.').pop().toLowerCase();
+
             if (file.size > tamanioMax) {
                 res.status(400);
-                res.json({ msg: "ERROR", tag: "El tamaño del archivo supera los 2MB ", code: 400 });
-            } else {
-                if (extensiones.includes(extension)) {
-                    const name = external + '.' + extension;
-                    fs.rename(file.filepath, "public/images/" + name, async function (err) {
-                        if (err) {
-                            res.status(400);
-                            console.log(err);
-                            res.json({ msg: "Error", tag: "No se pudo guardar el archivo", code: 400});
-                        } else {
-                            await auto.update({foto:name},{where:{external_id:externalAuto}});
-                            res.status(200);
-                            res.json({ msg: "OK", tag: "Imagen guardada", code: 200 });
-                            
-                        }
-                    });
-                } else {
-                    res.status(400);
-                    res.json({ msg: "ERROR", tag: "Solo soporta " + extensiones, code: 400 });
-                }
+                return res.json({ msg: "ERROR", tag: "El tamaño del archivo supera los 2MB ", code: 400 });
             }
 
-        }
-    });
+            if (!extensiones.includes(extension)) {
+                res.status(400);
+                return res.json({ msg: "ERROR", tag: "Solo soporta " + extensiones, code: 400 });
+            }
 
+            const name = external + '_' + index + '.' + extension;
+            fotos.push(name);  // Agregar el nombre de la imagen al array
+            fs.rename(file.filepath, "public/images/" + name, async function (err) {
+                if (err) {
+                    res.status(400);
+                    console.log(err);
+                    return res.json({ msg: "Error", tag: "No se pudo guardar el archivo", code: 400});
+                }
+            });
+        }
+
+        // Almacenar la cadena de imágenes en la base de datos
+        const cadenaFotos = fotos.join(',');  // Crear una cadena separada por comas
+        await auto.update({foto: cadenaFotos},{where:{external_id:externalAuto}});
+
+        res.status(200);
+        res.json({ msg: "OK", tag: "Imágenes guardadas", code: 200 });
+    });
 }
+
  
 }
 module.exports = AutoControl;
