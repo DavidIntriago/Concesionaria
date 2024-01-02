@@ -1,0 +1,658 @@
+{
+	"_type": "export",
+	"__export_format": 3,
+	"__export_date": "2024-01-02T03:05:58.204Z",
+	"__export_source": "insomnia.desktop.app:v6.2.0",
+	"resources": [
+		{
+			"_id": "wrk_6f9b77a493564814bd4de6e4cf9eb117",
+			"created": 1703304189087,
+			"description": "",
+			"modified": 1703304189087,
+			"name": "practica3",
+			"parentId": null,
+			"_type": "workspace"
+		},
+		{
+			"_id": "env_d284870bce204c9ab1a72f25a167f748",
+			"color": null,
+			"created": 1703304189123,
+			"data": {},
+			"isPrivate": false,
+			"metaSortKey": 1703304189123,
+			"modified": 1703304189123,
+			"name": "New Environment",
+			"parentId": "wrk_6f9b77a493564814bd4de6e4cf9eb117",
+			"_type": "environment"
+		},
+		{
+			"_id": "jar_1aaa111a2ca54f8bb5e485993cd8a585",
+			"cookies": [],
+			"created": 1703304189126,
+			"modified": 1703304189126,
+			"name": "Default Jar",
+			"parentId": "wrk_6f9b77a493564814bd4de6e4cf9eb117",
+			"_type": "cookie_jar"
+		},
+		{
+			"_id": "fld_d4c90a76020a4c6eb3ceea6048d05ff6",
+			"created": 1703306303280,
+			"description": "",
+			"environment": {},
+			"metaSortKey": -1703306303281,
+			"modified": 1703306303280,
+			"name": "persona",
+			"parentId": "wrk_6f9b77a493564814bd4de6e4cf9eb117",
+			"_type": "request_group"
+		},
+		{
+			"_id": "fld_17039ddc34be475b9dee9d3471a309cd",
+			"created": 1703306310432,
+			"description": "",
+			"environment": {},
+			"metaSortKey": -1703306310432,
+			"modified": 1703306310432,
+			"name": "ROl",
+			"parentId": "wrk_6f9b77a493564814bd4de6e4cf9eb117",
+			"_type": "request_group"
+		},
+		{
+			"_id": "fld_818be0f40cad4b9ca2a2de2e78afa829",
+			"created": 1703309220467,
+			"description": "",
+			"environment": {},
+			"metaSortKey": -1703309220467,
+			"modified": 1703309220467,
+			"name": "Cliente",
+			"parentId": "wrk_6f9b77a493564814bd4de6e4cf9eb117",
+			"_type": "request_group"
+		},
+		{
+			"_id": "fld_d28d7932aada4e3680993659b0d965a4",
+			"created": 1703310930760,
+			"description": "",
+			"environment": {},
+			"metaSortKey": -1703310930760,
+			"modified": 1703310930760,
+			"name": "Autos",
+			"parentId": "wrk_6f9b77a493564814bd4de6e4cf9eb117",
+			"_type": "request_group"
+		},
+		{
+			"_id": "fld_7370428202c4472abc3621bbdfb09f3d",
+			"created": 1703392161132,
+			"description": "",
+			"environment": {},
+			"metaSortKey": -1703392161132,
+			"modified": 1703392161132,
+			"name": "Venta",
+			"parentId": "wrk_6f9b77a493564814bd4de6e4cf9eb117",
+			"_type": "request_group"
+		},
+		{
+			"_id": "fld_01b99928b18a4d2295f72ca582493d63",
+			"created": 1703619518225,
+			"description": "",
+			"environment": {},
+			"metaSortKey": -1703619518225,
+			"modified": 1703619518225,
+			"name": "cuenta",
+			"parentId": "wrk_6f9b77a493564814bd4de6e4cf9eb117",
+			"_type": "request_group"
+		},
+		{
+			"_id": "req_495b528e89d847d49c4f929d7f48ad20",
+			"authentication": {},
+			"body": {},
+			"created": 1703306330456,
+			"description": "",
+			"headers": [],
+			"isPrivate": false,
+			"metaSortKey": -1703306330456,
+			"method": "GET",
+			"modified": 1703806777399,
+			"name": "GetPersona",
+			"parameters": [],
+			"parentId": "fld_d4c90a76020a4c6eb3ceea6048d05ff6",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingMaxTimelineDataSize": 1000,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "http://localhost:3000/users/admin/persona",
+			"_type": "request"
+		},
+		{
+			"_id": "req_1b15ade6170e4e86a70a9faa0d49f608",
+			"authentication": {},
+			"body": {
+				"mimeType": "application/json",
+				"text": "{\n\t\"nombres\":\"Do Camerino\",\n  \"apellidos\":\"Malagon\",\n \t\"direccion\":\"Ciudad Peluche\",\n \t\"celular\":\"1451200244\",\n\t\"fecha_nac\":\"1940-04-22\",\n\t\"correo\":\"danielAlavarez@dab.com\",\n\t\"clave\":\"daniAl\",\n\t\"id_rol\":\"5964073c-be05-42a6-8126-3462eb73f9ae\"\n}"
+			},
+			"created": 1703306460720,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_6a08a10024ae4508a7153e0ef9976216",
+					"name": "Content-Type",
+					"value": "application/json"
+				}
+			],
+			"isPrivate": false,
+			"metaSortKey": -1703306460720,
+			"method": "POST",
+			"modified": 1703806778441,
+			"name": "postPersona",
+			"parameters": [],
+			"parentId": "fld_d4c90a76020a4c6eb3ceea6048d05ff6",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingMaxTimelineDataSize": 1000,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "http://localhost:3000/users/admin/persona/save",
+			"_type": "request"
+		},
+		{
+			"_id": "req_260c3c2cbe25421090201ed3bb7644fe",
+			"authentication": {},
+			"body": {
+				"mimeType": "application/json",
+				"text": "{\n\t\"nombre\":\"cliente\"\n}"
+			},
+			"created": 1703304210026,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_3386af1bcfab45f884c34b983f452b5b",
+					"name": "Content-Type",
+					"value": "application/json"
+				}
+			],
+			"isPrivate": false,
+			"metaSortKey": -1703304844101,
+			"method": "POST",
+			"modified": 1703570613678,
+			"name": "postRol",
+			"parameters": [],
+			"parentId": "fld_17039ddc34be475b9dee9d3471a309cd",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingMaxTimelineDataSize": 1000,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "http://localhost:3000/users/admin/rol/save",
+			"_type": "request"
+		},
+		{
+			"_id": "req_acd45f605ccb4fafb97b776e49de998c",
+			"authentication": {},
+			"body": {},
+			"created": 1703304844051,
+			"description": "",
+			"headers": [],
+			"isPrivate": false,
+			"metaSortKey": -1703304844051,
+			"method": "GET",
+			"modified": 1703795702996,
+			"name": "getRol",
+			"parameters": [],
+			"parentId": "fld_17039ddc34be475b9dee9d3471a309cd",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingMaxTimelineDataSize": 1000,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "http://localhost:3000/users/admin/rol",
+			"_type": "request"
+		},
+		{
+			"_id": "req_5402278697e846b1b4ca41f6eaa1930b",
+			"authentication": {},
+			"body": {},
+			"created": 1703309229057,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_0dc40fdc94ba4ec0bfe26a5453ca1549",
+					"name": "token-key",
+					"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHRlcm5hbCI6Ijg5ODIzYmJhLWQ3Y2ItNDFkNi04MjJmLTdhMzY0YmJiOTkxNCIsImNoZWNrIjp0cnVlLCJpYXQiOjE3MDM5MDY0MzQsImV4cCI6MTcwMzkxMzYzNH0.4XvEJO2bW2f_z_0cdKiOjSnGfqK7P4TmCHeho7V7egQ"
+				}
+			],
+			"isPrivate": false,
+			"metaSortKey": -1703309229057,
+			"method": "GET",
+			"modified": 1703915749229,
+			"name": "getCLiente",
+			"parameters": [],
+			"parentId": "fld_818be0f40cad4b9ca2a2de2e78afa829",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingMaxTimelineDataSize": 1000,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "http://localhost:3000/users/admin/cliente",
+			"_type": "request"
+		},
+		{
+			"_id": "req_d8907cb7e848422b9c7e8b493a14ae39",
+			"authentication": {},
+			"body": {
+				"mimeType": "application/json",
+				"text": "{\n\t\"nombres\":\"Ana Belen\",\n  \"apellidos\":\"Ortega Ramirez\",\n \t\"direccion\":\"MAcara\",\n \t\"celular\":\"0994575412\",\n\t\"fecha_nac\":\"12/06/2003\"\n}"
+			},
+			"created": 1703309291426,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_1e69aed32c9341f99aa1aba07e7f6f10",
+					"name": "Content-Type",
+					"value": "application/json"
+				}
+			],
+			"isPrivate": false,
+			"metaSortKey": -1703309291426,
+			"method": "POST",
+			"modified": 1703907219872,
+			"name": "PostCLiente",
+			"parameters": [],
+			"parentId": "fld_818be0f40cad4b9ca2a2de2e78afa829",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingMaxTimelineDataSize": 1000,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "http://localhost:3000/users/admin/cliente/save",
+			"_type": "request"
+		},
+		{
+			"_id": "req_4f5e7589f4934e2591cdc7608072ba47",
+			"authentication": {},
+			"body": {},
+			"created": 1703310937916,
+			"description": "",
+			"headers": [],
+			"isPrivate": false,
+			"metaSortKey": -1703310937916,
+			"method": "GET",
+			"modified": 1704156267203,
+			"name": "getAutos",
+			"parameters": [],
+			"parentId": "fld_d28d7932aada4e3680993659b0d965a4",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingMaxTimelineDataSize": 1000,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "http://localhost:3000/users/autos",
+			"_type": "request"
+		},
+		{
+			"_id": "req_318d312c3a5d466e9dadeca2ee4e786d",
+			"authentication": {},
+			"body": {
+				"mimeType": "application/json",
+				"text": "{\n\t\"modelo\":\"Chevrolet\",\n  \"marca\":\"B50 european\",\n\t\"anio\":\"2012\",\n\t\"color\":\"Rojo\",\n  \"precio\": 19000   \n}"
+			},
+			"created": 1703311510505,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_1d51032a66014304a595be311ffacab1",
+					"name": "Content-Type",
+					"value": "application/json"
+				}
+			],
+			"isPrivate": false,
+			"metaSortKey": -1703311510505,
+			"method": "POST",
+			"modified": 1703821002643,
+			"name": "PostAuto",
+			"parameters": [],
+			"parentId": "fld_d28d7932aada4e3680993659b0d965a4",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingMaxTimelineDataSize": 1000,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "http://localhost:3000/users/admin/auto/save",
+			"_type": "request"
+		},
+		{
+			"_id": "req_0adcd4c224a342908957dbc7a72480fb",
+			"authentication": {},
+			"body": {
+				"mimeType": "application/json",
+				"text": "{\n\t\"modelo\":\"MAZDA\",\n  \"marca\":\"vt50 honada power\",\n\t\"anio\":\"2010\",\n\t\"color\":\"Plata\",\n  \"precio\":274552\n        \n}"
+			},
+			"created": 1703452772226,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_c62f4162d58042d9a8f04adc82fb5cd1",
+					"name": "Content-Type",
+					"value": "application/json"
+				}
+			],
+			"isPrivate": false,
+			"metaSortKey": -1703452772226,
+			"method": "PUT",
+			"modified": 1704143074608,
+			"name": "ActualizarAuto",
+			"parameters": [],
+			"parentId": "fld_d28d7932aada4e3680993659b0d965a4",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingMaxTimelineDataSize": 1000,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "http://localhost:3000/users/admin/auto/update/68e58b2a-d2a7-49b7-ab2a-b265c4b49a94",
+			"_type": "request"
+		},
+		{
+			"_id": "req_23a3bce5cdd245cf9e467ed939d16e5e",
+			"authentication": {},
+			"body": {
+				"mimeType": "multipart/form-data",
+				"params": [
+					{
+						"fileName": "/home/David/Desktop/imagenesAutos/bus.jpg",
+						"id": "pair_3b7037b537074cbebe82e41b7cede11f",
+						"name": "file",
+						"type": "file",
+						"value": ""
+					},
+					{
+						"id": "pair_a4c049406a904e12865a56e24fadfb4c",
+						"name": "external",
+						"value": "buss"
+					},
+					{
+						"fileName": "/home/David/Desktop/imagenesAutos/descarga.jpeg",
+						"id": "pair_c3e3dc9d41934852bc0da9f6b486a48a",
+						"name": "file",
+						"type": "file",
+						"value": ""
+					}
+				]
+			},
+			"created": 1703616631915,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_6d4506e10a2748d2bcd0ec4e285d531c",
+					"name": "Content-Type",
+					"value": "multipart/form-data"
+				},
+				{
+					"id": "pair_5de33ae2a64745da80cbdd861cc27197",
+					"name": "token-key",
+					"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHRlcm5hbCI6Ijg5ODIzYmJhLWQ3Y2ItNDFkNi04MjJmLTdhMzY0YmJiOTkxNCIsImNoZWNrIjp0cnVlLCJpYXQiOjE3MDQxNTY0MjUsImV4cCI6MTcwNDE2MzYyNX0.Sq6YmheAKhn2-4sesAcRonW1RLS6WElFE-7IrNSWxio"
+				}
+			],
+			"isPrivate": false,
+			"metaSortKey": -1703616631915,
+			"method": "POST",
+			"modified": 1704156515607,
+			"name": "subir iamgen",
+			"parameters": [],
+			"parentId": "fld_d28d7932aada4e3680993659b0d965a4",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingMaxTimelineDataSize": 1000,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "http://localhost:3000/users/admin/auto/update/imagen/ee7274b5-0c19-4aff-b295-47f69a374f14",
+			"_type": "request"
+		},
+		{
+			"_id": "req_a8ab07f81e90490a84fa1d50a995d91c",
+			"authentication": {},
+			"body": {},
+			"created": 1703859648941,
+			"description": "",
+			"headers": [],
+			"isPrivate": false,
+			"metaSortKey": -1703859648941,
+			"method": "GET",
+			"modified": 1704142821229,
+			"name": "obtenerAuto",
+			"parameters": [],
+			"parentId": "fld_d28d7932aada4e3680993659b0d965a4",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingMaxTimelineDataSize": 1000,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "http://localhost:3000/users/admin/infauto/eaeb4af1-1b52-4320-8efa-ada65b9abf68",
+			"_type": "request"
+		},
+		{
+			"_id": "req_8fd9722d473643b7910ae48ed58abaea",
+			"authentication": {},
+			"body": {},
+			"created": 1703392169936,
+			"description": "",
+			"headers": [],
+			"isPrivate": false,
+			"metaSortKey": -1703392169936,
+			"method": "GET",
+			"modified": 1704154800838,
+			"name": "GetVEnta",
+			"parameters": [],
+			"parentId": "fld_7370428202c4472abc3621bbdfb09f3d",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingMaxTimelineDataSize": 1000,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "http://localhost:3000/users/admin/venta",
+			"_type": "request"
+		},
+		{
+			"_id": "req_ac0a3e9f886a43908d902b22faaac72b",
+			"authentication": {},
+			"body": {
+				"mimeType": "application/json",
+				"text": "{\n\t\"fecha\":\"2023-12-24\", \n\t\"id_auto\":\"cb497243-1ba3-4b16-a164-3b9eecb53a3b\", \n\t\"id_cliente\":\"c0fbbb94-5a86-4627-ba00-4cbf0f18d9a5\", \n\t\"id_vendedor\":\"423425e7-108f-43f3-b36b-66a1b7d0f0e5\"\n}"
+			},
+			"created": 1703392198601,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_98c73540ea884b4484253981eae2f6cd",
+					"name": "Content-Type",
+					"value": "application/json"
+				},
+				{
+					"id": "pair_3ff27e5535cf431abd2459f0fb474940",
+					"name": "token-key",
+					"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHRlcm5hbCI6Ijg5ODIzYmJhLWQ3Y2ItNDFkNi04MjJmLTdhMzY0YmJiOTkxNCIsImNoZWNrIjp0cnVlLCJpYXQiOjE3MDM5NTE3NTEsImV4cCI6MTcwMzk1ODk1MX0.5u0elD8Jixe8XI9jXsR3XC4wtN3JCkdthPos8PbF2rA"
+				}
+			],
+			"isPrivate": false,
+			"metaSortKey": -1703392198601,
+			"method": "POST",
+			"modified": 1703952977465,
+			"name": "POstVenta",
+			"parameters": [],
+			"parentId": "fld_7370428202c4472abc3621bbdfb09f3d",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingMaxTimelineDataSize": 1000,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "http://localhost:3000/users/admin/venta/save",
+			"_type": "request"
+		},
+		{
+			"_id": "req_e1d3e64d2fcf450f9ebaed16de26cb6e",
+			"authentication": {},
+			"body": {
+				"mimeType": "application/json",
+				"text": "{\n\t\"fecha\":\"2023-12-24\", \n\t\"id_auto\":\"f6a7a490-4382-4efd-8656-a9b9d9137993\", \n\t\"id_cliente\":\"c0fbbb94-5a86-4627-ba00-4cbf0f18d9a5\"\n}"
+			},
+			"created": 1703432744915,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_eb234a8a407949dbbef49add802ca63f",
+					"name": "Content-Type",
+					"value": "application/json"
+				}
+			],
+			"isPrivate": false,
+			"metaSortKey": -1703432744915,
+			"method": "PUT",
+			"modified": 1703961143510,
+			"name": "ACtualizarVenta",
+			"parameters": [],
+			"parentId": "fld_7370428202c4472abc3621bbdfb09f3d",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingMaxTimelineDataSize": 1000,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "http://localhost:3000/users/admin/venta/update/37bd32e3-f0ab-4a9f-a750-085022881797",
+			"_type": "request"
+		},
+		{
+			"_id": "req_79917c7055e94569ae0e6e65961e6ab3",
+			"authentication": {},
+			"body": {},
+			"created": 1703446524348,
+			"description": "",
+			"headers": [],
+			"isPrivate": false,
+			"metaSortKey": -1703446524348,
+			"method": "GET",
+			"modified": 1704154380225,
+			"name": "getVenta_vendedor",
+			"parameters": [],
+			"parentId": "fld_7370428202c4472abc3621bbdfb09f3d",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingMaxTimelineDataSize": 1000,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "http://localhost:3000/users/admin/venta/vendedor/423425e7-108f-43f3-b36b-66a1b7d0f0e5",
+			"_type": "request"
+		},
+		{
+			"_id": "req_6c3dc34e1c8f4552b4574b5a737b7035",
+			"authentication": {},
+			"body": {},
+			"created": 1703447015288,
+			"description": "",
+			"headers": [],
+			"isPrivate": false,
+			"metaSortKey": -1703447015288,
+			"method": "GET",
+			"modified": 1704132898880,
+			"name": "getObtener",
+			"parameters": [],
+			"parentId": "fld_7370428202c4472abc3621bbdfb09f3d",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingMaxTimelineDataSize": 1000,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "http://localhost:3000/users/admin/venta/37bd32e3-f0ab-4a9f-a750-085022881797",
+			"_type": "request"
+		},
+		{
+			"_id": "req_de9bc99a3599473b9de81119e9f95ba3",
+			"authentication": {},
+			"body": {},
+			"created": 1704132896449,
+			"description": "",
+			"headers": [],
+			"isPrivate": false,
+			"metaSortKey": -1704132896449,
+			"method": "GET",
+			"modified": 1704138518503,
+			"name": "ventames",
+			"parameters": [],
+			"parentId": "fld_7370428202c4472abc3621bbdfb09f3d",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingMaxTimelineDataSize": 1000,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "http://localhost:3000/users/admin/ventaMes/12",
+			"_type": "request"
+		},
+		{
+			"_id": "req_79268a106b1744028822a855da9563d7",
+			"authentication": {},
+			"body": {
+				"mimeType": "application/json",
+				"text": "{\n\t\"correo\":\"danielAlavarez@dab.com\",\n\t\"clave\":\"daniAl\"\n}"
+			},
+			"created": 1703478505551,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_4b61d8284bf94fa986b25acd68e01b53",
+					"name": "Content-Type",
+					"value": "application/json"
+				}
+			],
+			"isPrivate": false,
+			"metaSortKey": -1703549011888,
+			"method": "POST",
+			"modified": 1703809940760,
+			"name": "INicio Sesion",
+			"parameters": [],
+			"parentId": "fld_01b99928b18a4d2295f72ca582493d63",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingMaxTimelineDataSize": 1000,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "http://localhost:3000/users/admin/inicio_sesion",
+			"_type": "request"
+		},
+		{
+			"_id": "req_bec4e40a2cd846d6865cc98faf22fbab",
+			"authentication": {},
+			"body": {},
+			"created": 1703619530387,
+			"description": "",
+			"headers": [],
+			"isPrivate": false,
+			"metaSortKey": -1703619530387,
+			"method": "GET",
+			"modified": 1704152803176,
+			"name": "getcuentas",
+			"parameters": [],
+			"parentId": "fld_01b99928b18a4d2295f72ca582493d63",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingMaxTimelineDataSize": 1000,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "http://localhost:3000/users/admin/cuenta",
+			"_type": "request"
+		}
+	]
+}
